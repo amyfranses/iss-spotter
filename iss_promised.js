@@ -18,4 +18,15 @@ const fetchISSFlyOverTimes = function (body) {
   return request(url);
 };
 
-module.exports = { fetchMyIP, fetchCoordsByIP, fetchISSFlyOverTimes };
+// module.exports = { fetchMyIP, fetchCoordsByIP, fetchISSFlyOverTimes };
+const nextISSTimesForMyLocation = function () {
+  return fetchMyIP()
+    .then(fetchCoordsByIP)
+    .then(fetchISSFlyOverTimes)
+    .then((body) => {
+      const { response } = JSON.parse(body);
+      return response;
+    });
+};
+
+module.exports = { nextISSTimesForMyLocation };
